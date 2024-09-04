@@ -1,23 +1,40 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { FaRegUserCircle } from 'react-icons/fa';
+import { FaRegUserCircle, FaBars, FaTimes } from 'react-icons/fa';
 
 const DashboardLayout = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header */}
       <header className="bg-green-600 text-white flex justify-between items-center p-4">
         <h1 className="text-2xl font-bold">Tervive</h1>
-        <div className="flex items-center space-x-2">
-          <FaRegUserCircle className="text-xl" />
-          <span>JD</span> {/* Replace with dynamic initials */}
+        <div className="flex items-center space-x-4">
+          {/* Hamburger Icon */}
+          <button 
+            className="block md:hidden text-xl"
+            onClick={toggleSidebar}
+          >
+            {isSidebarOpen ? <FaTimes /> : <FaBars />}
+          </button>
+          <div className="flex items-center space-x-2">
+            <FaRegUserCircle className="text-xl" />
+            <span>JD</span> {/* Replace with dynamic initials */}
+          </div>
         </div>
       </header>
 
       {/* Body */}
       <div className="flex flex-1">
         {/* Side Panel */}
-        <nav className="w-64 bg-green-700 text-white p-4 space-y-4">
+        <nav
+          className={`fixed inset-y-0 left-0 z-30 transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:relative md:w-64 bg-green-700 text-white p-4 space-y-4 transition-transform duration-200 ease-in-out`}
+        >
           <ul>
             <li>
               <Link to="aqi-report" className="block py-2 px-4 rounded hover:bg-green-800">AQI Report</Link>
