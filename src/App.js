@@ -9,6 +9,7 @@ import HealthReport from './Dashboard/screens/HealthReport';
 import Credits from './Dashboard/screens/Credits';              
 import Leaderboard from './leaderboard/Leaderboard';  
 import Shops from './Dashboard/screens/Shops';
+import LoginPage from './Login/Login';
 
 const App = () => {
   return (
@@ -16,6 +17,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
         
         {/* Dashboard Layout with nested routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>
