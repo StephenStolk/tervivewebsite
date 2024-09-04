@@ -115,6 +115,7 @@ const SignupPage = () => {
             Sign Up
           </button>
         </form>
+        <p className='text-center' onClick={navigate('/login')}>Alredy have an account ? </p>
         <div className="mt-6">
           <p className="text-center text-sm font-medium text-gray-700 mb-4">Or sign up with</p>
           <div className="flex justify-center space-x-4">
