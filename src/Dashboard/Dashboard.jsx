@@ -26,12 +26,13 @@ const DashboardLayout = () => {
       setUserInitials(getInitials(userName));
     }
   }, []);
-
+//
+//#8a9d68
   return (
     <div className="flex min-h-screen bg-gray-100">
       {/* Sidebar */}
       <nav
-        className={`fixed inset-y-0 left-0 z-30 w-64 bg-[#8a9d68] text-white p-4 space-y-4 transition-transform duration-200 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:transform-none`}
+        className={`fixed inset-y-0 left-0 z-30 w-64 bg-[#aeca71] text-white p-4 space-y-4 transition-transform duration-200 ease-in-out ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 md:transform-none`}
       >
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-xl font-bold">Tervive</h1>
