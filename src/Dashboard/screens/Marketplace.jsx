@@ -68,6 +68,7 @@ const Marketplace = () => {
   const handleBuyClick = (plant) => {
     setSelectedPlant(plant);
     setQuantity(1);
+    setCredits(quantity*10);
     setShowModal(true);
   };
 
@@ -76,24 +77,46 @@ const Marketplace = () => {
     setSelectedPlant(null);
   };
 
+  
+
+// async function fetchUserDetails() {
+//   try {
+//     const response = await axios.get(`/api/users/${userId}`);
+//     console.log(response.data);
+//   } catch (error) {
+//     console.error('Error fetching user details:', error);
+//   }
+// };
+
+
   const handleBuyOut = async () => {
     const pricePerUnit = (Math.random() * 100).toFixed(2);
     const totalPrice = (pricePerUnit * quantity).toFixed(2);
+  
     alert(`You have purchased ${quantity} ${selectedPlant.common_name}(s) for $${totalPrice} USD`);
-    setCredits((prevCredits) => prevCredits + 5 * quantity); 
-    // closeModal();
-
-    try {
-        const response = await axios.post('./api/users/update-credits', {
-            credits,
-        purchasedPlant: selectedPlant.common_name,
-        });
-        navigate('credits');
-    } catch (error) {
-  console.error('Failed to update credits:', error);
-}
-closeModal();
+  
+    // Deduct credits for the purchase (assumed 10 credits per purchase)
+    // const plantCredits = 10;
+    
+    // fetchUserDetails();
+    // try {
+    //   const response = await axios.post('/api/users/update-credits', {
+    //     userId: 'USER_ID_HERE', 
+    //     purchasedPlant: selectedPlant.common_name,
+    //     plantCredits,
+    //   });
+  
+    //   // On success, navigate to credits page
+    //   if (response.status === 200) {
+    //     navigate('/credits'); // Assuming 'credits' is the route for credits page
+    //   }
+    // } catch (error) {
+    //   console.error('Failed to update credits:', error);
+    // }
+  
+    closeModal();
   };
+  
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
