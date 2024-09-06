@@ -9,11 +9,11 @@ const SignupPage = () => {
     phone: '',
     password: '',
   });
-  
+
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
 
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const { name, email, phone, password } = formData;
 
@@ -31,34 +31,41 @@ const SignupPage = () => {
         },
         body: JSON.stringify(formData),
       });
-
+  
       const data = await res.json();
-
+  
       if (!res.ok) {
         throw new Error(data.message || 'Something went wrong');
       }
-
-      // Handle success (e.g., save token, redirect, show message)
+  
+      localStorage.setItem('token', data.token); // Store the JWT token
+      localStorage.setItem('userId', data.userId); // Store the userId
+      localStorage.setItem('userName', formData.name); 
+  
       setSuccess('Account created successfully!');
       setError(null);
-
-      // Redirect to the Dashboard
-      navigate('/dashboard'); // Redirecting to Dashboard after signup
-
+  
+      navigate('/dashboard');
     } catch (err) {
       setError(err.message);
       setSuccess(null);
     }
+  };
+  
+  
+
+  const handleLoginNavigation = () => {
+    navigate('/login'); // Navigate to the login page
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-green-100 text-gray-800">
       <div className="max-w-md w-full bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-bold text-center mb-8">Create an Account</h2>
-        
+
         {error && <p className="text-red-500 text-center mb-4">{error}</p>}
         {success && <p className="text-green-500 text-center mb-4">{success}</p>}
-        
+
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
             <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
@@ -115,7 +122,16 @@ const SignupPage = () => {
             Sign Up
           </button>
         </form>
-        <p className='text-center' onClick={navigate('/login')}>Alredy have an account ? </p>
+
+        <div className="text-center mt-4">
+          <p
+            className="text-sm font-medium text-gray-700 cursor-pointer hover:underline"
+            onClick={handleLoginNavigation}
+          >
+            Already have an account? Log in
+          </p>
+        </div>
+
         <div className="mt-6">
           <p className="text-center text-sm font-medium text-gray-700 mb-4">Or sign up with</p>
           <div className="flex justify-center space-x-4">

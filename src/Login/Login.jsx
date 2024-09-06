@@ -16,6 +16,7 @@ const LoginPage = () => {
   const { email, password } = formData;
 
   const handleChange = (e) => {
+    setError(null);
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -31,22 +32,22 @@ const LoginPage = () => {
       });
 
       const data = await res.json();
+      console.log('Login response:', data); // Log the response
 
       if (!res.ok) {
-        throw new Error(data.message || 'Something went wrong');
+        throw new Error(data.message || 'Invalid credentials');
       }
 
-      // Store token in localStorage
+      // Store token in localStorage and handle success
       localStorage.setItem('token', data.token);
-
-      // Handle success
       setSuccess('Logged in successfully!');
       setError(null);
 
-      // Redirect to the Dashboard
-      navigate('/dashboard');
+      // Redirect to the dashboard after successful login
+      navigate('/dashboard', { replace: true });
 
     } catch (err) {
+      console.error('Login error:', err); // Log the error
       setError(err.message);
       setSuccess(null);
     }
