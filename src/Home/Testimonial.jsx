@@ -37,7 +37,7 @@ const teamMembers = [
 
 const TestimonialSection = () => {
   return (
-    <section className="bg-green-50 py-16 px-4 pb-24">
+    <section className="bg-green-50 py-16 px-4 pb-24" id="testimonial">
       <div className="max-w-7xl mx-auto">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}

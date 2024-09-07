@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const SolutionSection = () => {
   return (
-    <section id="solutions" className="py-16 px-4 bg-white text-green-900 mt-28 mb-12">
+    <section className="py-16 px-4 bg-white text-green-900 mt-28 mb-12">
       <h2 className="text-3xl font-bold text-center mb-8">Our Solutions</h2>
       <div className="max-w-4xl mx-auto">
         <p className="mb-4">

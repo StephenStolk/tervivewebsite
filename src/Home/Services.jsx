@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 const Services = () => {
   return (
-    <section className="bg-gray-50 py-28">
+    <section className="bg-gray-50 py-28" id="solutions">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold">Services Offered</h2>
         <p className="text-gray-600 mt-4">
