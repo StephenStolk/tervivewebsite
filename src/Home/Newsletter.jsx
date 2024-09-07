@@ -3,7 +3,7 @@ import React from 'react'
 const Newsletter = () => {
   return (
     <> 
-    <div className="flex justify-center items-center bg-green-50 p-12 mt-8">
+    <div className="flex justify-center items-center bg-green-50 p-12 pt-24">
   <div className="flex shadow-md p-2 w-full max-w-2xl p-4 bg-[#86946d]">
     <input
       type="text"
