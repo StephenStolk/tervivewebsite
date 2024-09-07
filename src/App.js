@@ -10,6 +10,8 @@ import Credits from './Dashboard/screens/Credits';
 import Leaderboard from './leaderboard/Leaderboard';  
 import Shops from './Dashboard/screens/Shops';
 import LoginPage from './Login/Login';
+import Community from './Dashboard/screens/Community';
+import FAQ from './Dashboard/screens/FAQ';
 
 const App = () => {
   return (
@@ -26,7 +28,9 @@ const App = () => {
           <Route path="health-report" element={<HealthReport />} />   
           <Route path="credits" element={<Credits />} />   
           <Route path="shops" element={<Shops />} />            
-          <Route path="leaderboard" element={<Leaderboard />} />      
+          <Route path="leaderboard" element={<Leaderboard />} />  
+          <Route path="community" element={<Community />} /> 
+          <Route path="faq" element={<FAQ />} />         
         </Route>
       </Routes>
     </Router>
