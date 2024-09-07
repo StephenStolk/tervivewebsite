@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import User from '../../../../backend/models/User';
 
 const Marketplace = () => {
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ const Marketplace = () => {
         const { edible, poisonous, cycle, watering, sunlight, indoor } = filters;
         const response = await axios.get(`https://perenual.com/api/species-list`, {
           params: {
-            key: 'sk-9GCZ66d7038005a326710',
+            key: 'sk-RQmk66dbeb376c7216761',
             edible: edible ? 1 : null,
             poisonous: poisonous ? 1 : null,
             cycle: cycle || null,
@@ -77,46 +76,14 @@ const Marketplace = () => {
     setSelectedPlant(null);
   };
 
-  
-
-// async function fetchUserDetails() {
-//   try {
-//     const response = await axios.get(`/api/users/${userId}`);
-//     console.log(response.data);
-//   } catch (error) {
-//     console.error('Error fetching user details:', error);
-//   }
-// };
-
-
   const handleBuyOut = async () => {
     const pricePerUnit = (Math.random() * 100).toFixed(2);
     const totalPrice = (pricePerUnit * quantity).toFixed(2);
   
     alert(`You have purchased ${quantity} ${selectedPlant.common_name}(s) for $${totalPrice} USD`);
   
-    // Deduct credits for the purchase (assumed 10 credits per purchase)
-    // const plantCredits = 10;
-    
-    // fetchUserDetails();
-    // try {
-    //   const response = await axios.post('/api/users/update-credits', {
-    //     userId: 'USER_ID_HERE', 
-    //     purchasedPlant: selectedPlant.common_name,
-    //     plantCredits,
-    //   });
-  
-    //   // On success, navigate to credits page
-    //   if (response.status === 200) {
-    //     navigate('/credits'); // Assuming 'credits' is the route for credits page
-    //   }
-    // } catch (error) {
-    //   console.error('Failed to update credits:', error);
-    // }
-  
     closeModal();
   };
-  
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
@@ -126,11 +93,11 @@ const Marketplace = () => {
     <div className="p-6 bg-gray-100 min-h-screen">
       {/* Two Stylish Cards for Farming Commodities and Plants */}
       <div className="flex flex-col md:flex-row justify-around mb-8">
-        <div className="bg-white p-6 rounded-lg shadow-lg mb-4 md:mb-0 w-full md:w-5/12">
+        <div className="bg-white p-6 shadow-lg mb-4 md:mb-0 w-full md:w-5/12">
           <h2 className="text-2xl font-bold mb-2">Farming Commodities</h2>
           <p>Explore a wide range of farming commodities.</p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow-lg w-full md:w-5/12">
+        <div className="bg-white p-6 shadow-lg w-full md:w-5/12">
           <h2 className="text-2xl font-bold mb-2">Plants</h2>
           <p>Find various plants for your garden or farm.</p>
         </div>
@@ -139,15 +106,15 @@ const Marketplace = () => {
       {/* Plant Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-8">
         {displayedPlants.map((plant) => (
-          <div key={plant.id} className="bg-white p-4 rounded-lg shadow-lg">
+          <div key={plant.id} className="bg-white p-4 shadow-lg flex flex-col h-full">
             {plant.default_image && plant.default_image.thumbnail ? (
               <img
                 src={plant.default_image.thumbnail}
                 alt={plant.common_name}
-                className="w-full h-40 object-cover rounded-md mb-4"
+                className="w-full h-40 object-cover mb-4"
               />
             ) : (
-              <div className="w-full h-40 bg-gray-200 flex items-center justify-center rounded-md mb-4">
+              <div className="w-full h-40 bg-gray-200 flex items-center justify-center mb-4">
                 <span className="text-gray-600 text-center">{plant.common_name}</span>
               </div>
             )}
@@ -161,12 +128,14 @@ const Marketplace = () => {
             <p className="text-gray-700 mb-2">
               <strong>Watering:</strong> {plant.watering}
             </p>
-            <button
-              onClick={() => handleBuyClick(plant)}
-              className="w-full bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 mb-0"
-            >
-              Buy
-            </button>
+            <div className="mt-auto">
+              <button
+                onClick={() => handleBuyClick(plant)}
+                className="w-full bg-green-600 text-white py-2 px-4 hover:bg-green-700"
+              >
+                Buy
+              </button>
+            </div>
           </div>
         ))}
       </div>
@@ -180,7 +149,7 @@ const Marketplace = () => {
             <select
               name="edible"
               onChange={handleFilterChange}
-              className="border p-2 rounded w-full"
+              className="border p-2 w-full"
             >
               <option value="">Any</option>
               <option value="true">Yes</option>
@@ -192,7 +161,7 @@ const Marketplace = () => {
             <select
               name="poisonous"
               onChange={handleFilterChange}
-              className="border p-2 rounded w-full"
+              className="border p-2 w-full"
             >
               <option value="">Any</option>
               <option value="true">Yes</option>
@@ -204,7 +173,7 @@ const Marketplace = () => {
             <select
               name="cycle"
               onChange={handleFilterChange}
-              className="border p-2 rounded w-full"
+              className="border p-2 w-full"
             >
               <option value="">Any</option>
               <option value="perennial">Perennial</option>
@@ -218,7 +187,7 @@ const Marketplace = () => {
             <select
               name="watering"
               onChange={handleFilterChange}
-              className="border p-2 rounded w-full"
+              className="border p-2 w-full"
             >
               <option value="">Any</option>
               <option value="frequent">Frequent</option>
@@ -232,7 +201,7 @@ const Marketplace = () => {
             <select
               name="sunlight"
               onChange={handleFilterChange}
-              className="border p-2 rounded w-full"
+              className="border p-2 w-full"
             >
               <option value="">Any</option>
               <option value="full_shade">Full Shade</option>
@@ -259,59 +228,43 @@ const Marketplace = () => {
         <div className="flex justify-center mt-8">
           <button
             onClick={loadMorePlants}
-            className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700 "
+            className="bg-green-600 text-white py-2 px-4 hover:bg-green-700"
           >
-            More
+            Load More Plants
           </button>
         </div>
       )}
 
-      {/* Checkout Modal */}
+      {/* Buy Modal */}
       {showModal && selectedPlant && (
-       
-       <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-       <div className="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
-         <h2 className="text-2xl font-bold mb-4">Checkout</h2>
-         <div className="mb-4">
-           <strong>Plant:</strong> {selectedPlant.common_name}
-         </div>
-         <div className="mb-4">
-           <strong>Price per unit:</strong> ${(Math.random() * 100).toFixed(2)}
-         </div>
-         <div className="mb-4">
-           <label htmlFor="quantity" className="block mb-2 text-sm font-medium">Quantity</label>
-           <input
-             type="number"
-             id="quantity"
-             name="quantity"
-             value={quantity}
-             onChange={handleQuantityChange}
-             min="1"
-             className="border p-2 rounded w-full"
-           />
-         </div>
-         <div className="mb-4">
-           <strong>Total:</strong> ${(quantity * (Math.random() * 100)).toFixed(2)}
-         </div>
-         <div className="flex justify-end">
-           <button
-             onClick={closeModal}
-             className="bg-gray-500 text-white py-2 px-4 rounded-lg mr-2 hover:bg-gray-600"
-           >
-             Cancel
-           </button>
-           <button
-             onClick={handleBuyOut}
-             className="bg-green-600 text-white py-2 px-4 rounded-lg hover:bg-green-700"
-           >
-             Buy
-           </button>
-         </div>
-       </div>
-     </div>
-   )}
- </div>
-);
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-8 shadow-lg w-11/12 md:w-1/2 lg:w-1/3">
+            <h2 className="text-2xl font-bold mb-4">{selectedPlant.common_name}</h2>
+            <p className="mb-4">Enter the quantity you want to buy:</p>
+            <input
+              type="number"
+              min="1"
+              value={quantity}
+              onChange={handleQuantityChange}
+              className="border p-2 mb-4 w-full"
+            />
+            <button
+              onClick={handleBuyOut}
+              className="w-full bg-green-600 text-white py-2 px-4 hover:bg-green-700"
+            >
+              Buy Now
+            </button>
+            <button
+              onClick={closeModal}
+              className="w-full bg-red-600 text-white py-2 px-4 mt-4 hover:bg-red-700"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Marketplace;
