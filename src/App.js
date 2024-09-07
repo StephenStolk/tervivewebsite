@@ -23,6 +23,8 @@ const App = () => {
         
         {/* Dashboard Layout with nested routes */}
         <Route path="/dashboard" element={<DashboardLayout />}>
+          {/* The 'index' route will load the AqiReport by default */}
+          <Route index element={<AqiReport />} />
           <Route path="aqi-report" element={<AqiReport />} />         
           <Route path="marketplace" element={<Marketplace />} />      
           <Route path="health-report" element={<HealthReport />} />   
