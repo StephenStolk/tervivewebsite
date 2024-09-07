@@ -26,7 +26,7 @@ const Intro = () => {
         >
           Your One stop solution!
           <br />
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, iste?
+          Solve all your agrarian and credits management here 
         </motion.h1>
 
         <motion.button
