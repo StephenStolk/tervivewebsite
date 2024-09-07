@@ -1,30 +1,38 @@
-// 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
+import terviveimage from "./terviveimage.png";
 
 const Intro = () => {
+  // Intersection Observer Hook
+  const { ref: textRef, inView: textInView } = useInView({ triggerOnce: false });
+  const { ref: imageRef, inView: imageInView } = useInView({ triggerOnce: false });
+
   return (
-    <section className="w-full flex flex-col md:flex-row mb-16">
+    <section className="w-full flex flex-col md:flex-row bg-[#8a9d68] h-[35rem]">
       {/* Left side with text and buttons */}
       <motion.div
-        className="w-full md:w-1/2 flex flex-col mx-auto my-auto justify-center p-6 px-28 text-start"
+        ref={textRef}
+        className="w-full md:w-1/2 flex flex-col mx-auto justify-center px-10 text-start"
         initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
+        animate={{ opacity: textInView ? 1 : 0, x: textInView ? 0 : -50 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl text-green-900">
-          TERVIVE
-        </h1>
-        <h2 className="scroll-m-20 border-b pb-2 text-2xl tracking-tight first:mt-0 mt-2 text-green-900">
+        <motion.h1
+          className="scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl text-green-900"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: textInView ? 1 : 0, y: textInView ? 0 : -20 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+        >
           Your One stop solution!
           <br />
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, iste?
-        </h2>
+        </motion.h1>
 
         <motion.button
-          className="bg-[#8a9d68] text-white font-semibold py-3 rounded-lg hover:bg-[#8a9d68] transition mt-4 w-1/4"
+          className="bg-[#7a8b56] text-green-900 font-semibold py-3 px-6 hover:bg-green-900 transition mt-4 w-1/4 text-green-900"
           initial={{ scale: 1 }}
-          whileHover={{ scale: 1.05 }}
+          whileHover={{ scale: 1.05, backgroundColor: '#7a8b56' }}
           whileTap={{ scale: 0.95 }}
           transition={{ type: 'spring', stiffness: 300 }}
         >
@@ -34,15 +42,19 @@ const Intro = () => {
 
       {/* Right side with image */}
       <motion.div
-        className="w-full md:w-1/2 flex items-center justify-center p-6"
+        ref={imageRef}
+        className="w-full md:w-1/2 flex items-center justify-center bg-white py-10"
         initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.5 }}
+        animate={{ opacity: imageInView ? 1 : 0, x: imageInView ? 0 : 50 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <img
-          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQG0CNMRgjBOYvxdO-0OT3ChqdHQxK0F9u6sw&usqp=CAU"
+        <motion.img
+          src={terviveimage}
           alt="agriculture"
-          className="w-[70%] h-[80%] rounded-lg shadow-lg"
+          className="w-full h-auto shadow-sm rounded-lg"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: imageInView ? 1 : 0, scale: imageInView ? 1 : 0.95 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
         />
       </motion.div>
     </section>
