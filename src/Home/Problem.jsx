@@ -51,7 +51,7 @@ const problems = [
 const ProblemSection = () => {
   return (
     <>
-      <section id="about" className="bg-green-50 text-green-900 pb-24 pt-20">
+      <section id="problems" className="bg-green-50 text-green-900 pb-24 pt-20">
         <div className="max-w-8xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}

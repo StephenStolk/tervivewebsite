@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link } from 'react-scroll'; // Use 'react-scroll' for smooth scrolling
 import { motion } from 'framer-motion';
 
 const Navbar = () => {
@@ -11,12 +11,12 @@ const Navbar = () => {
           <div className="text-green-800 text-2xl font-bold">Tervive</div>
           {/* Center-align the navbar links */}
           <div className="hidden md:flex space-x-6 justify-center items-center">
-            <Link to="/" className="text-green-800 hover:text-white hover:bg-[#8a9d68] px-4 py-2 hover:rounded-xl">Home</Link>
-            <Link to="/about" className="text-green-800 hover:text-white hover:bg-[#8a9d68] px-4 py-2 hover:rounded-xl">About</Link>
-            <Link to="/contact" className="text-green-800 hover:text-white hover:bg-[#8a9d68] px-4 py-2 hover:rounded-xl">Contact</Link>
-            <Link to="/products" className="text-green-800 hover:text-white hover:bg-[#8a9d68] px-4 py-2 hover:rounded-xl">Products</Link>
-            <Link to="/signup">
-              <button className="bg-[#8a9d68] text-white rounded-xl px-4 py-2 rounded">Signup</button>
+            <Link to="/" smooth={true} duration={500} className="text-green-800 hover:text-white hover:bg-[#8a9d68] px-4 py-2 hover:rounded-xl hover:cursor-pointer">Home</Link>
+            <Link to="problems" smooth={true} duration={500} className="text-green-800 hover:text-white hover:bg-[#8a9d68] px-4 py-2 hover:rounded-xl hover:cursor-pointer">Problems</Link>
+            <Link to="testimonial" smooth={true} duration={500} className="text-green-800 hover:text-white hover:bg-[#8a9d68] px-4 py-2 hover:rounded-xl hover:cursor-pointer">Our Team</Link>
+            <Link to="solutions" smooth={true} duration={500} className="text-green-800 hover:text-white hover:bg-[#8a9d68] px-4 py-2 hover:rounded-xl hover:cursor-pointer">Solutions</Link>
+            <Link to="signup">
+              <button className="bg-[#8a9d68] text-white rounded-xl px-4 py-2 rounded hover:cursor-pointer hover:bg-green-900">Signup</button>
             </Link>
           </div>
           <div className="md:hidden">
@@ -34,11 +34,11 @@ const Navbar = () => {
             className="md:hidden"
           >
             <div className="flex flex-col space-y-4 mt-4 text-green-800 hover:text-green-800 hover:bg-green-800">
-              <Link to="/">Home</Link>
-              <Link to="/about">About</Link>
-              <Link to="/contact">Contact</Link>
-              <Link to="/products">Products</Link>
-              <Link to="/signup">
+              <Link to="home" smooth={true} duration={500}>Home</Link>
+              <Link to="about" smooth={true} duration={500}>About</Link>
+              <Link to="contact" smooth={true} duration={500}>Contact</Link>
+              <Link to="products" smooth={true} duration={500}>Products</Link>
+              <Link to="signup">
                 <button className="bg-white text-green-600 px-4 py-2 rounded">Signup</button>
               </Link>
             </div>
