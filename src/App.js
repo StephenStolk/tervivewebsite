@@ -13,6 +13,8 @@ import LoginPage from './Login/Login';
 import Community from './Dashboard/screens/Community';
 import FAQ from './Dashboard/screens/FAQ';
 import PlantRecommend from './Dashboard/screens/PlantRecommend';
+import OurProducts from './Dashboard/screens/OurProducts';
+import Verification from './Dashboard/screens/Verification';
 
 const App = () => {
   return (
@@ -34,7 +36,9 @@ const App = () => {
           <Route path="shops" element={<Shops />} />            
           <Route path="leaderboard" element={<Leaderboard />} />  
           <Route path="community" element={<Community />} /> 
-          <Route path="faq" element={<FAQ />} />         
+          <Route path="faq" element={<FAQ />} />      
+          <Route path="ourproducts" element={<OurProducts />} />    
+          <Route path="verification" element={<Verification />} />    
         </Route>
       </Routes>
     </Router>

@@ -60,6 +60,9 @@ const DashboardLayout = () => {
             <Link to="credits" className="block py-2 px-4 rounded hover:bg-green-800">Credits</Link>
           </li>
           <li>
+            <Link to="verification" className="block py-2 px-4 rounded hover:bg-green-800">Verify Credits</Link>
+          </li>
+          <li>
             <Link to="shops" className="block py-2 px-4 rounded hover:bg-green-800">Nearby Shops</Link>
           </li>
           <li>
@@ -70,6 +73,9 @@ const DashboardLayout = () => {
           </li>
           <li>
             <Link to="faq" className="block py-2 px-4 rounded hover:bg-green-800">Plant FAQ</Link>
+          </li>
+          <li>
+            <Link to="ourproducts" className="block py-2 px-4 rounded hover:bg-green-800">Our Products</Link>
           </li>
         </ul>
       </nav>
