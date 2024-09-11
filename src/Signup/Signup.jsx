@@ -31,20 +31,19 @@ const SignupPage = () => {
         },
         body: JSON.stringify(formData),
       });
-  
+    
       const data = await res.json();
-  
+    
       if (!res.ok) {
         throw new Error(data.message || 'Something went wrong');
       }
   
-      localStorage.setItem('token', data.token); // Store the JWT token
-      localStorage.setItem('userId', data.userId); // Store the userId
-      localStorage.setItem('userName', formData.name); 
-  
+      localStorage.setItem('token', data.token);
+      localStorage.setItem('userId', data.userId);
+      localStorage.setItem('userName', formData.name);
+    
       setSuccess('Account created successfully!');
       setError(null);
-  
       navigate('/dashboard');
     } catch (err) {
       setError(err.message);

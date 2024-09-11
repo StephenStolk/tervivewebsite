@@ -1,78 +1,63 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Credits = () => {
-  const [credits, setCredits] = useState(10); // Initial credits set to 10
-  const [userData, setUserData] = useState({});
-  const [formData, setFormData] = useState({ name: '', address: '' });
-  const [loadingTime, setLoadingTime] = useState('');
-  const navigate = useNavigate();
+  const location = useLocation();
+  const [ticket, setTicket] = useState(null);
 
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userId = localStorage.getItem('userId');
-        const response = await axios.get(`/api/users/${userId}`);
-        setUserData(response.data);
-        setCredits(response.data.credits || 10); // Set at least 10 credits
-      } catch (error) {
-        console.error('Failed to fetch user data:', error);
-      }
-    };
+    if (location.state && location.state.plantName) {
+      const newTicket = {
+        plantName: location.state.plantName,
+        credits: location.state.credits,
+        timestamp: location.state.timestamp,
+      };
 
-    const currentTime = new Date().toLocaleTimeString();
-    setLoadingTime(currentTime);
-
-    fetchUserData();
-  }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const userId = localStorage.getItem('userId');
-      await axios.post('/api/users/update-credits', {
-        userId,
-        plantCredits: 10,
-      });
-      alert('Credits earned successfully!');
-      navigate('/marketplace');
-    } catch (error) {
-      console.error('Failed to earn credits:', error);
+      // Set the ticket (only one ticket will be stored)
+      setTicket(newTicket);
     }
-  };
+  }, [location.state]);
 
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-extrabold mb-6 text-green-900">Your Credits: {credits}</h1>
+      <h1 className="text-3xl font-extrabold mb-6 text-green-900">
+        Your Credits
+      </h1>
 
       {/* Side-by-side Ticket and Earn Credit */}
       <div className="flex flex-col md:flex-row gap-6 mb-8">
         {/* Ticket Box */}
         <div className="bg-white p-4 border border-gray-300 shadow w-full md:w-1/2">
           <div className="border border-dashed border-gray-500 p-4 relative">
-            <div className="absolute top-2 left-4 text-xs text-gray-500">Page Loaded: {loadingTime}</div>
-            <h2 className="text-xl font-semibold mb-4 text-center uppercase tracking-wide text-green-900">Johin Japanese Maple</h2>
-            <div className="flex justify-between items-center">
-              <span className="text-gray-500 font-semibold">Current Credits:</span>
-              <span className="text-green-900 text-xl font-bold">{credits}</span>
-            </div>
+            {ticket && (
+              <>
+                <div className="absolute top-2 left-4 text-xs text-gray-500">
+                  Page Loaded: {new Date().toLocaleString()}
+                </div>
+                <h2 className="text-xl font-semibold mb-4 text-center uppercase tracking-wide text-green-900">
+                  {ticket.plantName}
+                </h2>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-500 font-semibold">Current Credits:</span>
+                  <span className="text-green-900 text-xl font-bold">{ticket.credits}</span>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
         {/* Earn Credits Form */}
-        <form onSubmit={handleSubmit} className="bg-white p-6 border border-gray-300 shadow w-full md:w-1/2">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            // Handle form submission
+          }}
+          className="bg-white p-6 border border-gray-300 shadow w-full md:w-1/2"
+        >
           <h2 className="text-xl font-bold mb-4 text-green-900">Earn Credits</h2>
           <input
             type="text"
             name="name"
-            value={formData.name}
-            onChange={handleChange}
             placeholder="Name"
             className="border border-gray-300 p-2 w-full mb-4 text-green-900"
             required
@@ -80,8 +65,6 @@ const Credits = () => {
           <input
             type="text"
             name="address"
-            value={formData.address}
-            onChange={handleChange}
             placeholder="Address"
             className="border border-gray-300 p-2 w-full mb-4 text-green-900"
             required
@@ -95,13 +78,12 @@ const Credits = () => {
         </form>
       </div>
 
-      {/* Blockchain Contract Section */}
+      {/* Blockchain-Based Contract */}
       <div className="bg-white p-6 border border-gray-300 shadow w-full mb-6">
         <h2 className="text-xl font-bold mb-4 text-green-900">Blockchain-Based Contract</h2>
         <p className="text-gray-600 mb-4">
           This blockchain contract ensures transparency between farmers and merchants by eliminating middlemen. Both parties sign a secure digital contract.
         </p>
-        
         <div className="bg-gray-100 p-4 flex items-center mb-6">
           <img
             src="https://img.icons8.com/color/96/contract.png"
@@ -200,3 +182,49 @@ const Credits = () => {
 };
 
 export default Credits;
+
+
+//original above
+
+// import React, { useEffect, useState } from 'react';
+// import axios from 'axios';
+
+// const CreditsPage = () => {
+//   const [purchases, setPurchases] = useState([]);
+  
+//   useEffect(() => {
+//     // Fetch all purchases for the user
+//     const fetchPurchases = async () => {
+//       try {
+//         const response = await axios.get(`http://localhost:5000/api/purchase/user/USER_ID`); // Replace with actual user ID
+//         setPurchases(response.data);
+//       } catch (error) {
+//         console.error('Error fetching purchases:', error);
+//       }
+//     };
+
+//     fetchPurchases();
+//   }, []);
+  
+//   return (
+//     <div className="p-6 bg-gray-100 min-h-screen">
+//       <h1 className="text-2xl font-bold mb-6">Your Purchase History</h1>
+//       {purchases.length > 0 ? (
+//         <div className="space-y-4">
+//           {purchases.map((purchase, index) => (
+//             <div key={index} className="bg-white p-4 shadow-md rounded-lg">
+//               <h2 className="text-xl font-bold">{purchase.plantName}</h2>
+//               <p>Quantity: {purchase.quantity}</p>
+//               <p>Total Price: ${purchase.totalPrice}</p>
+//               <p>Purchase Date: {new Date(purchase.date).toLocaleDateString()}</p>
+//             </div>
+//           ))}
+//         </div>
+//       ) : (
+//         <p>No purchases found.</p>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default CreditsPage;

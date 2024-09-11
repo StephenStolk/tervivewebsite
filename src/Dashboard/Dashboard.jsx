@@ -48,6 +48,9 @@ const DashboardLayout = () => {
             <Link to="aqi-report" className="block py-2 px-4 rounded hover:bg-green-900 mt-12">AQI Report</Link>
           </li>
           <li>
+            <Link to="plantrecommend" className="block py-2 px-4 rounded hover:bg-green-800">Plant Recommend</Link>
+          </li>
+          <li>
             <Link to="health-report" className="block py-2 px-4 rounded hover:bg-green-800">Health Report</Link>
           </li>
           <li>

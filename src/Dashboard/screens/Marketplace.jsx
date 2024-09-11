@@ -64,26 +64,110 @@ const Marketplace = () => {
     }));
   };
 
-  const handleBuyClick = (plant) => {
-    setSelectedPlant(plant);
-    setQuantity(1);
-    setCredits(quantity*10);
-    setShowModal(true);
-  };
+  // const handleBuyClick = (plant) => {
+  //   setSelectedPlant(plant);
+  //   setQuantity(1);
+  //   setCredits(quantity * 10);
+  //   setShowModal(true);
+  // };
 
   const closeModal = () => {
     setShowModal(false);
     setSelectedPlant(null);
   };
 
-  const handleBuyOut = async () => {
-    const pricePerUnit = (Math.random() * 100).toFixed(2);
-    const totalPrice = (pricePerUnit * quantity).toFixed(2);
+  // const handleBuyOut = async () => {
+  //   try {
+  //     const pricePerUnit = (Math.random() * 100).toFixed(2);
+  //     const totalPrice = (pricePerUnit * quantity).toFixed(2);
+
+  //     // Create purchase request to the backend
+  //     const purchaseData = {
+  //       plantType: selectedPlant.common_name,
+  //       quantity,
+  //       initialLocation: {
+  //         lat: 0, // Set to user's actual location in production
+  //         lon: 0, // Set to user's actual location in production
+  //       },
+  //       initialImage: 'sample-image-url', // Replace with actual image data
+  //     };
+
+  //     const response = await axios.post('/api/purchases/create', purchaseData);
+  //     if (response.status === 201) {
+  //       // Purchase created successfully, redirect to credits page
+  //       navigate('/dashboard/credits', {
+  //         state: {
+  //           plantName: selectedPlant.common_name,
+  //           quantity,
+  //           credits: response.data.currentCredits, // Use the credits returned by the API
+  //           timestamp: new Date().toLocaleTimeString(),
+  //         },
+  //       });
+  //     } else {
+  //       console.error('Failed to create purchase:', response.status);
+  //     }
+      
+  //     closeModal();
+  //   } catch (error) {
+  //     console.error('Error creating purchase:', error);
+  //   }
+  // };
+
+  // Modified handleBuyClick in Marketplace.jsx
+const handleBuyClick = (plant) => {
+  setSelectedPlant(plant);
+  setQuantity(1);
+  setCredits(quantity * 10); // Assuming 10 credits per plant
+  setShowModal(true);
+};
+
+// Modified handleBuyOut in Marketplace.jsx
+const handleBuyOut = async () => {
+  const totalCredits = quantity * 10; // Assuming each plant gives 10 credits
+  const timestamp = new Date().toLocaleTimeString();
+
+  // Redirect to Credits page with plant data and quantity
+  navigate('/dashboard/credits', {
+    state: {
+      plantName: selectedPlant.common_name,
+      quantity,
+      credits: totalCredits,
+      timestamp,
+    },
+  });
   
-    alert(`You have purchased ${quantity} ${selectedPlant.common_name}(s) for $${totalPrice} USD`);
-  
-    closeModal();
-  };
+  closeModal();
+};
+
+//original above
+
+// const handleBuyO = async (plantId, plantName, quantity, totalPrice) => {
+//   const token = localStorage.getItem('authToken');
+
+//   const response = await fetch('/api/purchases/create', {
+//     method: 'POST',
+//     headers: {
+//       'Content-Type': 'application/json',
+//       Authorization: `Bearer ${token}`,
+//     },
+//     body: JSON.stringify({
+//       plantId,
+//       plantName,
+//       quantity,
+//       totalPrice,
+//     }),
+//   });
+
+//   const data = await response.json();
+
+//   if (response.ok) {
+//     console.log('Purchase successful:', data);
+//     // Redirect to the credits page or update the UI as needed
+//   } else {
+//     console.error('Error during purchase:', data.message);
+//   }
+// };
+
 
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
@@ -268,3 +352,4 @@ const Marketplace = () => {
 };
 
 export default Marketplace;
+

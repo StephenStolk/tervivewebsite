@@ -12,6 +12,7 @@ import Shops from './Dashboard/screens/Shops';
 import LoginPage from './Login/Login';
 import Community from './Dashboard/screens/Community';
 import FAQ from './Dashboard/screens/FAQ';
+import PlantRecommend from './Dashboard/screens/PlantRecommend';
 
 const App = () => {
   return (
@@ -26,7 +27,8 @@ const App = () => {
           {/* The 'index' route will load the AqiReport by default */}
           <Route index element={<AqiReport />} />
           <Route path="aqi-report" element={<AqiReport />} />         
-          <Route path="marketplace" element={<Marketplace />} />      
+          <Route path="marketplace" element={<Marketplace />} />  
+          <Route path="plantrecommend" element={<PlantRecommend />} />          
           <Route path="health-report" element={<HealthReport />} />   
           <Route path="credits" element={<Credits />} />   
           <Route path="shops" element={<Shops />} />            

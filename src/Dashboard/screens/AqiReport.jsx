@@ -80,6 +80,7 @@ const AqiReport = () => {
   }, []);
 
   return (
+    <>
     <div className="min-h-screen py-10 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-xl p-8">
         <h2 className="text-4xl font-bold mb-6 text-green-900 text-center">
@@ -141,6 +142,8 @@ const AqiReport = () => {
         )}
       </div>
     </div>
+    
+    </>
   );
 };
 
