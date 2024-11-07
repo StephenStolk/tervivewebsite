@@ -364,32 +364,60 @@ const Marketplace = () => {
     setSelectedPlant(null);
   };
 
+  // const handleBuyOut = () => {
+  //   const totalCredits = quantity * 10;
+  //   const timestamp = new Date().toLocaleTimeString();
+
+  //   const newPurchase = {
+  //     plantName: selectedPlant.scientificName,
+  //     quantity,
+  //     credits: totalCredits,
+  //     timestamp,
+  //   };
+
+  //   // Add the new purchase to the existing purchases array
+  //   const updatedPurchases = [...purchases, newPurchase];
+  //   setPurchases(updatedPurchases);
+
+  //   // Store the updated purchases array in localStorage
+  //   localStorage.setItem('purchases', JSON.stringify(updatedPurchases));
+
+  //   // Redirect to the credits page with all purchases
+  //   navigate('/dashboard/credits', {
+  //     state: { purchases: updatedPurchases },
+  //   });
+
+  //   closeModal();
+  // };
+
   const handleBuyOut = () => {
     const totalCredits = quantity * 10;
     const timestamp = new Date().toLocaleTimeString();
-
+    const uniqueId = Math.random().toString(36).substr(2, 4).toUpperCase(); // Generate a unique ID of length 4
+  
     const newPurchase = {
+      id: uniqueId,
       plantName: selectedPlant.scientificName,
       quantity,
       credits: totalCredits,
       timestamp,
     };
-
+  
     // Add the new purchase to the existing purchases array
     const updatedPurchases = [...purchases, newPurchase];
     setPurchases(updatedPurchases);
-
+  
     // Store the updated purchases array in localStorage
     localStorage.setItem('purchases', JSON.stringify(updatedPurchases));
-
+  
     // Redirect to the credits page with all purchases
     navigate('/dashboard/credits', {
       state: { purchases: updatedPurchases },
     });
-
+  
     closeModal();
   };
-
+  
   const handleQuantityChange = (e) => {
     setQuantity(e.target.value);
   };
